@@ -72,6 +72,7 @@
 #include "selinux.h"
 #include "service.h"
 #include "subcontext.h"
+#include "vendor_init.h"
 #include "util.h"
 
 using namespace std::literals::string_literals;
@@ -1086,6 +1087,7 @@ static Result<Success> do_load_persist_props(const BuiltinArguments& args) {
     SendLoadPersistentPropertiesMessage();
 
     start_waiting_for_property("ro.persistent_properties.ready", "true");
+    vendor_load_persist_properties();
     return Success();
 }
 
